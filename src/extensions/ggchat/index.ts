@@ -76,12 +76,19 @@ export const ggchat = extension({
               // Only process messages from our configured chat
               if (payload.new.chat_id === process.env.GGCHAT_CHAT_ID) {
                 log.info("ggchat", "Received message", payload.new);
+                const mentionsMaximus = payload.new.message
+                  .toLowerCase()
+                  .includes("maximus");
+
+                log.info("ggchat", "Mentions Maximus", mentionsMaximus);
 
                 // Don't process our own messages
                 if (payload.new.user_id !== process.env.GGCHAT_BOT_ID) {
                   send(
                     ggchatContext,
-                    {},
+                    {
+                      shouldRespond: mentionsMaximus,
+                    },
                     {
                       user: {
                         id: payload.new.user_id,
@@ -109,17 +116,18 @@ export const ggchat = extension({
         return context.type === ggchatContext.type;
       },
       handler: async (data, ctx, { container }) => {
-        const supabase = container.resolve<SupabaseClient>("supabase");
-        log.info("ggchat", "Sending message", data);
-
-        await supabase.from("messages").insert({
-          message: data.content,
-          type: "regular",
-          chat_id: process.env.GGCHAT_CHAT_ID,
-          user_id: process.env.GGCHAT_BOT_ID,
-          meta: { bot: true },
-        });
-
+        log.info("ggchat", "Context.args", ctx.args);
+        if (ctx.args.shouldRespond) {
+          const supabase = container.resolve<SupabaseClient>("supabase");
+          log.info("ggchat", "Sending message", data);
+          await supabase.from("messages").insert({
+            message: data.content,
+            type: "regular",
+            chat_id: process.env.GGCHAT_CHAT_ID,
+            user_id: process.env.GGCHAT_BOT_ID,
+            meta: { bot: true },
+          });
+        }
         return {
           data,
           timestamp: Date.now(),
