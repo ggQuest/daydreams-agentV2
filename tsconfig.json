@@ -10,7 +10,7 @@
   },
   "include": [
     "*.ts"
-  ],
+, "src/index.ts", "src/character.ts"  ],
   "exclude": [
     "node_modules"
   ]
