@@ -23,11 +23,8 @@ const ggchatService = service({
     );
   },
   async boot(container) {
-    const supabase = container.resolve<SupabaseClient>("supabase");
-    log.info(
-      "ggchat",
-      `GGChat service started for chat ${process.env.GGCHAT_CHAT_ID}`,
-    );
+    container.resolve<SupabaseClient>("supabase");
+    log.info("ggchat", `GGChat service started`);
   },
 });
 
@@ -75,7 +72,7 @@ export const ggchat = extension({
             (payload) => {
               // Only process messages from our configured chat
               if (payload.new.chat_id === process.env.GGCHAT_CHAT_ID) {
-                log.info("ggchat", "Received message", payload.new);
+                log.info("ggchat", "Received message");
                 const mentionsMaximus = payload.new.message
                   .toLowerCase()
                   .includes("maximus");
@@ -116,7 +113,6 @@ export const ggchat = extension({
         return context.type === ggchatContext.type;
       },
       handler: async (data, ctx, { container }) => {
-        log.info("ggchat", "Context.args", ctx.args);
         if (ctx.args.shouldRespond) {
           const supabase = container.resolve<SupabaseClient>("supabase");
           log.info("ggchat", "Sending message", data);
