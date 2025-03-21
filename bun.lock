@@ -14,6 +14,7 @@
         "@daydreamsai/telegram": "^0.2.15",
         "@openrouter/ai-sdk-provider": "^0.2.1",
         "@supabase/supabase-js": "^2.49.1",
+        "@tavily/core": "^0.3.3",
         "ai": "^4.1.25",
         "chalk": "^5.4.1",
         "discord.js": "^14.14.1",
@@ -117,7 +118,7 @@
 
     "@supabase/supabase-js": ["@supabase/supabase-js@2.49.1", "", { "dependencies": { "@supabase/auth-js": "2.68.0", "@supabase/functions-js": "2.4.4", "@supabase/node-fetch": "2.6.15", "@supabase/postgrest-js": "1.19.2", "@supabase/realtime-js": "2.11.2", "@supabase/storage-js": "2.7.1" } }, "sha512-lKaptKQB5/juEF5+jzmBeZlz69MdHZuxf+0f50NwhL+IE//m4ZnOeWlsKRjjsM0fVayZiQKqLvYdBn0RLkhGiQ=="],
 
-    "@tavily/core": ["@tavily/core@0.3.1", "", { "dependencies": { "axios": "^1.7.7", "js-tiktoken": "^1.0.14" } }, "sha512-7jyvPWG4Zjst0s4v0FMLO1f/dfHqs4FnqvKm86zOGYzXxSfxHu0isbLzlwjJad0csYwF0kifdlECTuNouHfr5A=="],
+    "@tavily/core": ["@tavily/core@0.3.3", "", { "dependencies": { "axios": "^1.7.7", "js-tiktoken": "^1.0.14" } }, "sha512-Dn1TvtVo/btPDWXnH+bhlQxj+YGW0rkM1PUNBxJeEnjHBbuhjjDsibiqoe/wObMzrF44+gBB59NJ3MNduVTjMw=="],
 
     "@telegraf/types": ["@telegraf/types@8.3.1", "", {}, "sha512-17RBlU04nwiERnrm6X32C/tr0/bYjXWAujS+zeK1C94pcnqetCk2IdqvfXLK9GluSMcyY6iMV5Kt0oAEZ7NF8w=="],
 
@@ -591,6 +592,8 @@
 
     "@daydreamsai/chromadb/@daydreamsai/core": ["@daydreamsai/core@0.2.17-alpha.0", "", { "dependencies": { "@ai-sdk/openai": "^1.1.14", "@langchain/core": "^0.3.39", "@langchain/textsplitters": "^0.1.0", "@modelcontextprotocol/sdk": "^1.6.1", "@tavily/core": "^0.3.1", "ai": "^4.1.46", "chromadb-default-embed": "^2.13.2", "dotenv": "^16.4.7", "js-tiktoken": "^1.0.18", "openai": "^4.83.0", "p-defer": "^4.0.1", "uuid": "^11.1.0", "zod": "^3.24.2", "zod-to-json-schema": "^3.24.1" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-w4QXMeg47P+PSkFOaxP4IlLx8lISVyamBJ5eqHdNaJIta582Sef35iu7dYgkyD+kDlmz4AxxF7EaLYLnwKoh4Q=="],
 
+    "@daydreamsai/core/@tavily/core": ["@tavily/core@0.3.1", "", { "dependencies": { "axios": "^1.7.7", "js-tiktoken": "^1.0.14" } }, "sha512-7jyvPWG4Zjst0s4v0FMLO1f/dfHqs4FnqvKm86zOGYzXxSfxHu0isbLzlwjJad0csYwF0kifdlECTuNouHfr5A=="],
+
     "@daydreamsai/mongodb/@daydreamsai/core": ["@daydreamsai/core@0.2.16", "", { "dependencies": { "@ai-sdk/openai": "^1.1.14", "@langchain/core": "^0.3.39", "@langchain/textsplitters": "^0.1.0", "@modelcontextprotocol/sdk": "^1.6.1", "@tavily/core": "^0.3.1", "ai": "^4.1.46", "chromadb-default-embed": "^2.13.2", "dotenv": "^16.4.7", "js-tiktoken": "^1.0.18", "openai": "^4.83.0", "p-defer": "^4.0.1", "uuid": "^11.1.0", "zod": "^3.24.2", "zod-to-json-schema": "^3.24.1" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-/i3XneM+/GCeJrZEgSoA2zXSSSkAjvkMYnKTtNn9He+dOzdGl1YEY2gOvMwKVwwgH/NNQzlpHnZEPAVgshTivA=="],
 
     "@discordjs/rest/@discordjs/collection": ["@discordjs/collection@2.1.1", "", {}, "sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg=="],
@@ -634,6 +637,10 @@
     "telegraf/@telegraf/types": ["@telegraf/types@7.1.0", "", {}, "sha512-kGevOIbpMcIlCDeorKGpwZmdH7kHbqlk/Yj6dEpJMKEQw5lk0KVQY0OLXaCswy8GqlIVLd5625OB+rAntP9xVw=="],
 
     "wrap-ansi/ansi-styles": ["ansi-styles@4.3.0", "", { "dependencies": { "color-convert": "^2.0.1" } }, "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg=="],
+
+    "@daydreamsai/chromadb/@daydreamsai/core/@tavily/core": ["@tavily/core@0.3.1", "", { "dependencies": { "axios": "^1.7.7", "js-tiktoken": "^1.0.14" } }, "sha512-7jyvPWG4Zjst0s4v0FMLO1f/dfHqs4FnqvKm86zOGYzXxSfxHu0isbLzlwjJad0csYwF0kifdlECTuNouHfr5A=="],
+
+    "@daydreamsai/mongodb/@daydreamsai/core/@tavily/core": ["@tavily/core@0.3.1", "", { "dependencies": { "axios": "^1.7.7", "js-tiktoken": "^1.0.14" } }, "sha512-7jyvPWG4Zjst0s4v0FMLO1f/dfHqs4FnqvKm86zOGYzXxSfxHu0isbLzlwjJad0csYwF0kifdlECTuNouHfr5A=="],
 
     "@types/node-fetch/@types/node/undici-types": ["undici-types@6.20.0", "", {}, "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="],
 

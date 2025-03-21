@@ -3,7 +3,8 @@
  * Using Groq as the model provider
  */
 import { createGroq } from "@ai-sdk/groq";
-import { createDreams, validateEnv, createMemoryStore } from "@daydreamsai/core";
+import { createDreams, validateEnv, createMemoryStore, createContainer, LogLevel } from "@daydreamsai/core";
+import { tavily } from "@tavily/core";
 import { cli } from "@daydreamsai/core/extensions";
 import { telegram } from "@daydreamsai/telegram";
 import { z } from "zod";
@@ -24,10 +25,17 @@ const env = validateEnv(
     GGCHAT_BOT_ID: z.string().min(1, "GGCHAT_BOT_ID is required"),
     GGCHAT_CHAT_ID: z.string().min(1, "GGCHAT_CHAT_ID is required"),
     OPENAI_API_KEY: z.string().min(1, "OPENAI_API_KEY is required"),
+    TAVILY_API_KEY: z.string().min(1, "TAVILY_API_KEY is required"),
   }),
 );
 
-// Initialize Groq client
+const container = createContainer();
+container.singleton("tavily", () =>
+  tavily({
+    apiKey: process.env.TAVILY_API_KEY!,
+  })
+);
+
 const groq = createGroq({
   apiKey: env.GROQ_API_KEY!,
 });
@@ -56,10 +64,11 @@ const startAgent = async () => {
     "http://localhost:8000" 
   );
 
-// Create and start the agent
+  // Create and start the agent
   createDreams({
     model: groq("deepseek-r1-distill-llama-70b"),
     extensions: [cli, telegram, ggchat],
+    container,
     context: goalContexts,
     actions: [knowledgeAction, ...tasks],
     memory: {
@@ -68,7 +77,7 @@ const startAgent = async () => {
       vectorModel: openai("gpt-4-turbo"),
     }
   }).start({
-    id: "507f1f77bcf86cd799439011", //random valid 24-character hex ObjectId
+    id: "Maximus", //random valid 24-character hex ObjectId
     initialGoal: "",
     initialTasks: [],
     initialKnowledge: knowledge,

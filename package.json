@@ -17,6 +17,7 @@
     "@daydreamsai/telegram": "^0.2.15",
     "@openrouter/ai-sdk-provider": "^0.2.1",
     "@supabase/supabase-js": "^2.49.1",
+    "@tavily/core": "^0.3.3",
     "ai": "^4.1.25",
     "chalk": "^5.4.1",
     "discord.js": "^14.14.1",
