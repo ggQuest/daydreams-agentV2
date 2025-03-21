@@ -77,8 +77,6 @@ export const ggchat = extension({
                   .toLowerCase()
                   .includes("maximus");
 
-                log.info("ggchat", "Mentions Maximus", mentionsMaximus);
-
                 // Don't process our own messages
                 if (payload.new.user_id !== process.env.GGCHAT_BOT_ID) {
                   send(

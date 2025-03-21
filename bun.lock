@@ -9,6 +9,7 @@
         "@ai-sdk/groq": "^1.1.7",
         "@ai-sdk/openai": "^1.1.14",
         "@daydreamsai/core": "^0.2.13",
+        "@daydreamsai/mongodb": "^0.2.16",
         "@daydreamsai/telegram": "^0.2.15",
         "@openrouter/ai-sdk-provider": "^0.2.1",
         "@supabase/supabase-js": "^2.49.1",
@@ -42,6 +43,8 @@
     "@cfworker/json-schema": ["@cfworker/json-schema@4.1.1", "", {}, "sha512-gAmrUZSGtKc3AiBL71iNWxDsyUC5uMaKKGdvzYsBoTW/xi42JQHl7eKV2OYzCUqvc+D2RCcf7EXY2iCyFIk6og=="],
 
     "@daydreamsai/core": ["@daydreamsai/core@0.2.15", "", { "dependencies": { "@ai-sdk/openai": "^1.1.14", "@langchain/core": "^0.3.39", "@langchain/textsplitters": "^0.1.0", "@modelcontextprotocol/sdk": "^1.6.1", "@tavily/core": "^0.3.1", "ai": "^4.1.46", "chromadb-default-embed": "^2.13.2", "dotenv": "^16.4.7", "js-tiktoken": "^1.0.18", "openai": "^4.83.0", "p-defer": "^4.0.1", "uuid": "^11.1.0", "zod": "^3.24.2", "zod-to-json-schema": "^3.24.1" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-grVHwkEybpHrb++oADl2tE2hARjtPgDLRBoLrLf7RTFmngP2Ud1hB7U9FHnM2K4p2IdEkpM6LAMpIf86zi8Jzw=="],
+
+    "@daydreamsai/mongodb": ["@daydreamsai/mongodb@0.2.16", "", { "dependencies": { "@daydreamsai/core": "0.2.16", "mongodb": "^6.14.2", "zod": "^3.24.2" } }, "sha512-AKZMDhWSkpRDMyQ+BEiFB3Ks89miQqh03wn1jq9Ml8uaWOC3mBfPa58BxqMJ7Q1Blnkpf198oxA9T8KTiLTbFw=="],
 
     "@daydreamsai/telegram": ["@daydreamsai/telegram@0.2.15", "", { "dependencies": { "@daydreamsai/core": "0.2.15", "@telegraf/types": "^8.3.1", "telegraf": "^4.16.3", "zod": "^3.24.2" }, "peerDependencies": { "typescript": "^5.6.3" } }, "sha512-wr273o9hubOwCSbn8QZUsFQJuzvx1z7lvoy0REneb8LvukFDjJpzf6FfwHKB+JNdDU1CEcaSD0NQw7m8FolYmQ=="],
 
@@ -562,6 +565,8 @@
     "zod": ["zod@3.24.2", "", {}, "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="],
 
     "zod-to-json-schema": ["zod-to-json-schema@3.24.4", "", { "peerDependencies": { "zod": "^3.24.1" } }, "sha512-0uNlcvgabyrni9Ag8Vghj21drk7+7tp7VTwwR7KxxXXc/3pbXz2PHlDgj3cICahgF1kHm4dExBFj7BXrZJXzig=="],
+
+    "@daydreamsai/mongodb/@daydreamsai/core": ["@daydreamsai/core@0.2.16", "", { "dependencies": { "@ai-sdk/openai": "^1.1.14", "@langchain/core": "^0.3.39", "@langchain/textsplitters": "^0.1.0", "@modelcontextprotocol/sdk": "^1.6.1", "@tavily/core": "^0.3.1", "ai": "^4.1.46", "chromadb-default-embed": "^2.13.2", "dotenv": "^16.4.7", "js-tiktoken": "^1.0.18", "openai": "^4.83.0", "p-defer": "^4.0.1", "uuid": "^11.1.0", "zod": "^3.24.2", "zod-to-json-schema": "^3.24.1" }, "peerDependencies": { "typescript": "^5.8.2" } }, "sha512-/i3XneM+/GCeJrZEgSoA2zXSSSkAjvkMYnKTtNn9He+dOzdGl1YEY2gOvMwKVwwgH/NNQzlpHnZEPAVgshTivA=="],
 
     "@discordjs/rest/@discordjs/collection": ["@discordjs/collection@2.1.1", "", {}, "sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg=="],
 
