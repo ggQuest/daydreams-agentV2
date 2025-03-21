@@ -8,13 +8,13 @@ export const tasks = [
     name: "addTask",
     description: "Add a task to the goal",
     schema: z.object({ task: z.string() }),
-    async handler(
+    handler(
       call: { data: { task: string } },
-      ctx: AgentContext<GoalMemory, any>,
+      ctx: { agentMemory: any },
       _agent: any,
     ) {
-      if (!ctx.memory) throw new Error("No agent memory found");
-      ctx.memory.tasks.push(call.data.task);
+      const agentMemory = ctx.agentMemory as GoalMemory;
+      agentMemory.tasks.push(call.data.task);
       return {};
     },
   }),
@@ -22,15 +22,17 @@ export const tasks = [
     name: "completeTask",
     description: "Complete a task",
     schema: z.object({ task: z.string() }),
-    async handler(
+    handler(
       call: { data: { task: string } },
-      ctx: AgentContext<GoalMemory, any>,
+      ctx: { agentMemory: any },
       _agent: any,
     ) {
-      if (!ctx.memory) throw new Error("No agent memory found");
-      ctx.memory.tasks = ctx.memory.tasks.filter(
-        (task) => task !== call.data.task,
-      );
+      const agentMemory = ctx.agentMemory as GoalMemory;
+      if (agentMemory) {
+        agentMemory.tasks = agentMemory.tasks.filter(
+          (task) => task !== call.data.task,
+        );
+      }
       return {};
     },
   }),

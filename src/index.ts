@@ -3,7 +3,12 @@
  * Using Groq as the model provider
  */
 import { createGroq } from "@ai-sdk/groq";
-import { createDreams, validateEnv, createMemoryStore, createContainer, LogLevel } from "@daydreamsai/core";
+import {
+  createDreams,
+  validateEnv,
+  createMemoryStore,
+  createContainer,
+} from "@daydreamsai/core";
 import { tavily } from "@tavily/core";
 import { cli } from "@daydreamsai/core/extensions";
 import { telegram } from "@daydreamsai/telegram";
@@ -11,7 +16,7 @@ import { z } from "zod";
 import { knowledge } from "./character.js";
 import { goalContexts } from "./contexts/contexts.js";
 import { tasks } from "./actions/tasks.js";
-import { knowledgeAction } from "./actions/knowledge.js";
+import { knowledgeActions } from "./actions/knowledge.js";
 import { ggchat } from "./extensions/ggchat/index.js";
 import { createChromaVectorStore } from "@daydreamsai/chromadb";
 import { openai } from "@ai-sdk/openai";
@@ -33,7 +38,7 @@ const container = createContainer();
 container.singleton("tavily", () =>
   tavily({
     apiKey: process.env.TAVILY_API_KEY!,
-  })
+  }),
 );
 
 const groq = createGroq({
@@ -41,7 +46,7 @@ const groq = createGroq({
 });
 
 const startAgent = async () => {
-/*  console.log("Initializing MongoDB memory store...");
+  /*  console.log("Initializing MongoDB memory store...");
   const mongoStore = await createMongoMemoryStore({
     uri: env.MONGO_URI!,
     dbName: env.MONGO_DB_NAME!,
@@ -57,11 +62,11 @@ const startAgent = async () => {
     deleteIndex: () => Promise.resolve(),
   });
 */
- 
+
   console.log("Initializing Chroma memory store...");
   const vector = createChromaVectorStore(
-    "agent-memory", 
-    "http://localhost:8000" 
+    "agent-memory",
+    "http://localhost:8000",
   );
 
   // Create and start the agent
@@ -70,12 +75,12 @@ const startAgent = async () => {
     extensions: [cli, telegram, ggchat],
     container,
     context: goalContexts,
-    actions: [knowledgeAction, ...tasks],
+    actions: [...knowledgeActions, ...tasks],
     memory: {
       store: createMemoryStore(),
       vector,
       vectorModel: openai("gpt-4-turbo"),
-    }
+    },
   }).start({
     id: "Maximus", //random valid 24-character hex ObjectId
     initialGoal: "",
