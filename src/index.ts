@@ -3,7 +3,7 @@
  * Using Groq as the model provider
  */
 import { createGroq } from "@ai-sdk/groq";
-import { createDreams, createMemory, validateEnv } from "@daydreamsai/core";
+import { createDreams, validateEnv, createMemoryStore } from "@daydreamsai/core";
 import { cli } from "@daydreamsai/core/extensions";
 import { telegram } from "@daydreamsai/telegram";
 import { z } from "zod";
@@ -12,7 +12,8 @@ import { goalContexts } from "./contexts/contexts.js";
 import { tasks } from "./actions/tasks.js";
 import { knowledgeAction } from "./actions/knowledge.js";
 import { ggchat } from "./extensions/ggchat/index.js";
-import { createMongoMemoryStore } from "@daydreamsai/mongodb";
+import { createChromaVectorStore } from "@daydreamsai/chromadb";
+import { openai } from "@ai-sdk/openai";
 
 const env = validateEnv(
   z.object({
@@ -22,11 +23,7 @@ const env = validateEnv(
     GGCHAT_SUPABASE_KEY: z.string().min(1, "GGCHAT_SUPABASE_KEY is required"),
     GGCHAT_BOT_ID: z.string().min(1, "GGCHAT_BOT_ID is required"),
     GGCHAT_CHAT_ID: z.string().min(1, "GGCHAT_CHAT_ID is required"),
-    MONGO_URI: z.string().min(1, "MONGO_URI is required"),
-    MONGO_DB_NAME: z.string().min(1, "MONGO_DB_NAME is required"),
-    MONGO_COLLECTION_NAME: z
-      .string()
-      .min(1, "MONGO_COLLECTION_NAME is required"),
+    OPENAI_API_KEY: z.string().min(1, "OPENAI_API_KEY is required"),
   }),
 );
 
@@ -36,7 +33,7 @@ const groq = createGroq({
 });
 
 const startAgent = async () => {
-  console.log("Initializing MongoDB memory store...");
+/*  console.log("Initializing MongoDB memory store...");
   const mongoStore = await createMongoMemoryStore({
     uri: env.MONGO_URI!,
     dbName: env.MONGO_DB_NAME!,
@@ -51,14 +48,25 @@ const startAgent = async () => {
     createIndex: () => Promise.resolve(),
     deleteIndex: () => Promise.resolve(),
   });
+*/
+ 
+  console.log("Initializing Chroma memory store...");
+  const vector = createChromaVectorStore(
+    "agent-memory", 
+    "http://localhost:8000" 
+  );
 
-  // Create and start the agent
+// Create and start the agent
   createDreams({
     model: groq("deepseek-r1-distill-llama-70b"),
     extensions: [cli, telegram, ggchat],
     context: goalContexts,
     actions: [knowledgeAction, ...tasks],
-    // memory,
+    memory: {
+      store: createMemoryStore(),
+      vector,
+      vectorModel: openai("gpt-4-turbo"),
+    }
   }).start({
     id: "507f1f77bcf86cd799439011", //random valid 24-character hex ObjectId
     initialGoal: "",
