@@ -8,6 +8,7 @@ import {
   validateEnv,
   createMemoryStore,
   createContainer,
+  searchWebAction,
 } from "@daydreamsai/core";
 import { tavily } from "@tavily/core";
 import { cli } from "@daydreamsai/core/extensions";
@@ -46,28 +47,8 @@ const groq = createGroq({
 });
 
 const startAgent = async () => {
-  /*  console.log("Initializing MongoDB memory store...");
-  const mongoStore = await createMongoMemoryStore({
-    uri: env.MONGO_URI!,
-    dbName: env.MONGO_DB_NAME!,
-    collectionName: env.MONGO_COLLECTION_NAME!,
-  });
-
-  console.log("MongoDB memory store initialized successfully");
-
-  const memory = createMemory(mongoStore, {
-    upsert: () => Promise.resolve(),
-    query: () => Promise.resolve([]),
-    createIndex: () => Promise.resolve(),
-    deleteIndex: () => Promise.resolve(),
-  });
-*/
-
   console.log("Initializing Chroma memory store...");
-  const vector = createChromaVectorStore(
-    "agent-memory",
-    "http://localhost:8000",
-  );
+  const vector = createChromaVectorStore("Maximus", "http://localhost:8000");
 
   // Create and start the agent
   createDreams({
@@ -75,14 +56,14 @@ const startAgent = async () => {
     extensions: [cli, telegram, ggchat],
     container,
     context: goalContexts,
-    actions: [...knowledgeActions, ...tasks],
+    actions: [...knowledgeActions, ...tasks, searchWebAction],
     memory: {
       store: createMemoryStore(),
       vector,
       vectorModel: openai("gpt-4-turbo"),
     },
   }).start({
-    id: "Maximus", //random valid 24-character hex ObjectId
+    id: "Maximus",
     initialGoal: "",
     initialTasks: [],
     initialKnowledge: knowledge,
