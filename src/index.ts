@@ -8,7 +8,6 @@ import {
   validateEnv,
   createMemoryStore,
   createContainer,
-  searchWebAction,
 } from "@daydreamsai/core";
 import { tavily } from "@tavily/core";
 import { cli } from "@daydreamsai/core/extensions";
@@ -56,7 +55,7 @@ const startAgent = async () => {
     extensions: [cli, telegram, ggchat],
     container,
     context: goalContexts,
-    actions: [...knowledgeActions, ...tasks, searchWebAction],
+    actions: [...knowledgeActions, ...tasks],
     memory: {
       store: createMemoryStore(),
       vector,
